@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod ugo+X ./*
+gind . -type d -exec chmod ugo+rx {} \;
