@@ -1,14 +1,22 @@
 #!/usr/bin/python3
-"""Module for task 0"""
-
+"""Contains top_ten function"""
 import requests
 
-def number_of_subsribers(subreddit):
-    """Queries the reddit API and returns the number of subsrcibers to the subreddit"""
 
-    sub_info = requests.get("https://www.reddit.com/r/{}/about.json".format(subreddit),
-            headers = {"User-Agent": "My-User-Agent"},
-            allow_redirects = False)
-    if sub_info.status_code >= 300:
-        return 0
-    return sub_info.json().get("data").get("subscription")
+def top_ten(subreddit):
+    """Print the titles of the 10 hottest posts on a given subreddit."""
+    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
+    headers = {
+        "User-Agent": "0x16-api_advanced:project:\
+v1.0.0 (by /u/firdaus_cartoon_jr)"
+    }
+    params = {
+        "limit": 10
+    }
+    response = requests.get(url, headers=headers, params=params,
+                            allow_redirects=False)
+    if response.status_code == 404:
+        print("None")
+        return
+    results = response.json().get("data")
+    [print(c.get("data").get("title")) for c in results.get("children")]
