@@ -34,20 +34,20 @@ defaults
 	errorfile 504 /etc/haproxy/errors/504.http
 
 # start of parameters for aysuarex.tech
-frontend aysuarex.tech-http-frontend
+frontend junglefruit.tech-http-frontend
 	bind	 *:80
 	http-request set-header X-Forwarded-Proto http
 	default_backend	 aysuarex.tech-backend
 
 
-frontend  aysuarex.tech-https-frontend
+frontend  junglefruit.tech-https-frontend
 	bind *:443 ssl crt /etc/ssl/aysuarex.tech.pem
 	http-request set-header X-Forwarded-Proto https
         default_backend aysuarex.tech-backend
 
 
-backend aysuarex.tech-backend
+backend junglefruit.tech-backend
         balance roundrobin
-        server 914-web-01 54.234.56.143:80 check
-        server 914-web-02 54.167.96.89:80 check
+        server 914-web-01 35.168.3.34:80 check
+        server 914-web-02 100.26.231.218:80 check
 # end of parameters
